@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-dash.component.scss']
 })
 export class HomeDashComponent {
+  receivedBoolean: boolean = false;
 
+  constructor() { }
+
+  handleBooleanChange(value: boolean) {
+    this.receivedBoolean = value;
+  }
 }

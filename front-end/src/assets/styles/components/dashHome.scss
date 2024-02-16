@@ -1,0 +1,83 @@
+@import "../abstracts/variables";
+#nav-bar {
+  background-color: $primary-color;
+  color: white;
+}
+
+#side-bar {
+  background-color: $secondry-color;
+  height: calc(100vh - 72px);
+  button {
+    border-radius: none;
+    padding: 0.5rem;
+    transition: all 0.3s ease-in;
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    .margin-arrow {
+      margin-left: 60px;
+    }
+  }
+  ul {
+    padding-left: 0;
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 10px 20px 10px 30px;
+      position: relative;
+      a {
+        text-decoration: none;
+        color: #ffffff81;
+
+        i {
+          margin-right: 10px;
+          width: 1.4375rem;
+        }
+        span {
+          font-weight: 500;
+          font-size: 15px;
+        }
+      }
+      &:hover a {
+        color: white;
+      }
+      li:hover::after {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 8px;
+        left: 0;
+        top: 0;
+        background-color: $secondry-color;
+      }
+      li:hover {
+        background-color: rgba($color: $secondry-color, $alpha: 0.1);
+      }
+    }
+  }
+  .position-right {
+    position: absolute;
+    right: -30px;
+    top: 10px;
+    cursor: pointer;
+    background-color: $secondry-color;
+    color: white;
+    border: 2px solid rgba($color: $secondry-color, $alpha: 0.1);;
+  }
+  .bg-hover::after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 4px;
+    left: 0;
+    top: 0;
+    background-color: white;
+  }
+  .bg-active{
+    background-color: rgba($color: black, $alpha: 0.1);
+
+  }
+}

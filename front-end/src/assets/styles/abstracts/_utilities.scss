@@ -1,0 +1,19 @@
+@import "../abstracts/variables";
+
+.logo {
+  cursor: pointer;
+  h5 {
+    line-height: 2rem;
+    letter-spacing: -1px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    span {
+      color: $secondry-color;
+    }
+  }
+  p {
+    letter-spacing: 2px;
+
+    background-color: rgba($color: white, $alpha: 0.5);
+  }
+}
