@@ -16,22 +16,26 @@ export class AddEditDetailsEmployeeComponent {
     'Purchase Department',
   ];
   constructor() {}
-  addEmployeeForm = new FormGroup({
+  employeeForm = new FormGroup({
     name: new FormControl(null, [
       Validators.required,
-      Validators.pattern('([a-zA-Z]){3,12}'),
+      Validators.pattern('^[A-Za-z]{3,}(?: [A-Za-z]{3,})*$'),
     ]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     nationalId: new FormControl(null, [
       Validators.required,
-      Validators.pattern(
-        '(2|3)[0-9][1-9][0-1][1-9][0-3][1-9](01|02|03|04|11|12|13|14|15|16|17|18|19|21|22|23|24|25|26|27|28|29|31|32|33|34|35|88)ddddd'
-      ),
+      Validators.pattern('^([0-9]){14}$'),
     ]),
     department: new FormControl(null, [Validators.required]),
     hireDate: new FormControl(null, [Validators.required]),
     manager: new FormControl(null, [Validators.required]),
-    code: new FormControl(null, [Validators.required]),
-
+    code: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^([0-9]){8,}$'),
+    ]),
   });
+
+  onSubmit(formData: FormGroup) {
+    console.log(formData.value);
+  }
 }
