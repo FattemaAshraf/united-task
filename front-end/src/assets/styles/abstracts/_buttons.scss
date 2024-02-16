@@ -1,1 +1,23 @@
 @import "../abstracts/variables";
+
+a{
+cursor: pointer;
+}
+.btn-action{
+  transition: all .05s ease;
+}
+.deleteHover:hover{
+  color: $red-color;
+  transform: scale(1.2);
+
+}
+
+.editHover:hover{
+  color:$secondry-color;
+  transform: scale(1.2);
+}
+
+.viewHover:hover{
+  color:$green-color;
+  transform: scale(1.2);
+}

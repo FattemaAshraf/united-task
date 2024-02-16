@@ -6,3 +6,18 @@ body {
 a{
   cursor: pointer;
 }
+
+//override angular mrtl
+.mat-mdc-form-field{
+  height: 3rem;
+}
+.mat-mdc-form-field-subscript-wrapper{
+  display: none;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  --mdc-filled-text-field-container-color: white
+}
+
+.mat-mdc-form-field-focus-overlay{
+  display: none;
+}

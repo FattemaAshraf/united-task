@@ -1,1 +1,166 @@
-<p>add-edit-details-employee works!</p>
+<section id="employees-add" class="p-4">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="page-header">
+        <h4><span>E</span>mployees >> <span>A</span>dd Employee</h4>
+        <p>Enter The details of Employee</p>
+      </div>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit(employeeForm)">
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text h-100" id="basic-addon1">
+                  Name
+                </span>
+              </div>
+              <input
+                formControlName="name"
+                type="text"
+                class="form-control"
+                placeholder="Enter Name"
+                aria-label="Name"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('name')?.touched&&employeeForm.get('name')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('name')?.getError('required')">Name Employee is required</p>
+              <p class="mb-0" *ngIf="employeeForm.get('name')?.getError('pattern')">please write your first and last name with min 3 charachters like:United Task</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text h-100" id="basic-addon1">
+                    National ID:
+                  </span>
+                </div>
+                <input
+                  formControlName="nationalId"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter National ID"
+                  aria-label="price"
+                  aria-describedby="basic-addon1"
+                />
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('nationalId')?.touched&&employeeForm.get('nationalId')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('nationalId')?.getError('required')">National ID is required</p>
+              <p class="mb-0" *ngIf="employeeForm.get('nationalId')?.getError('pattern')">National ID must be 14 digits</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text h-100" id="basic-addon1">
+                    Code:
+                  </span>
+                </div>
+                <input
+                  formControlName="code"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Code"
+                  aria-label="price"
+                  aria-describedby="basic-addon1"
+                />
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('code')?.touched&&employeeForm.get('code')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('code')?.getError('required')">Code employee is required</p>
+              <p class="mb-0" *ngIf="employeeForm.get('code')?.getError('pattern')">Code employee more than 8 digits</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text h-100" id="basic-addon1">
+                    E-Mail:
+                  </span>
+                </div>
+                <input
+                  formControlName="email"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter E-Mail"
+                  aria-label="price"
+                  aria-describedby="basic-addon1"
+                />
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('email')?.touched&&employeeForm.get('email')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('email')?.getError('required')">Email is required</p>
+              <p class="mb-0" *ngIf="employeeForm.get('email')?.getError('email')">Please Enter a valid email ex:abc@abc</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text h-100" id="basic-addon1">
+                  Department
+                </span>
+              </div>
+              <select
+                formControlName="department"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option *ngFor="let item of departments">{{ item }}</option>
+              </select>
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('department')?.touched&&employeeForm.get('department')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('department')?.getError('required')">Department is required</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text h-100" id="basic-addon1">
+                  Manager
+                </span>
+              </div>
+              <select
+                formControlName="manager"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option>manger</option>
+              </select>
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('manager')?.touched&&employeeForm.get('manager')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('manager')?.getError('required')">Manager is required</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text h-100" id="basic-addon1">
+                    Hire Date:
+                  </span>
+                </div>
+                <div class="form-control">
+                  <mat-form-field class="w-100">
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="hireDate"
+                    />
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('hireDate')?.touched&&employeeForm.get('hireDate')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('hireDate')?.getError('required')">Hire Date is required</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-2 my-4">
+            <button  [disabled]="employeeForm.invalid" type="submit" class="btn btn-primary px-5">Save</button>
+            <button type="button" class="btn btn-outline-danger px-5">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
