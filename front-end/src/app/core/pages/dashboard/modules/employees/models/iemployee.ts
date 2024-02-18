@@ -1,6 +1,6 @@
 
 export interface IEmployee {
-   email: string,
+    email: string,
     code: number,
     departmentId: number,
     mobileNumber: string,

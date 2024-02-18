@@ -74,6 +74,27 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text h-100" id="basic-addon1">
+                    Mobile Number:
+                  </span>
+                </div>
+                <input
+                  formControlName="mobileNumber"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Code"
+                  aria-label="price"
+                  aria-describedby="basic-addon1"
+                />
+            </div>
+            <div class="alert alert-danger py-1" *ngIf="employeeForm.get('mobileNumber')?.touched&&employeeForm.get('mobileNumber')?.status=='INVALID'">
+              <p class="mb-0" *ngIf="employeeForm.get('mobileNumber')?.getError('required')">mobile Number employee is required</p>
+              <p class="mb-0" *ngIf="employeeForm.get('mobileNumber')?.getError('pattern')">Please enter egyption number like: 01234-456-789</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text h-100" id="basic-addon1">
                     E-Mail:
                   </span>
                 </div>
@@ -88,7 +109,7 @@
             </div>
             <div class="alert alert-danger py-1" *ngIf="employeeForm.get('email')?.touched&&employeeForm.get('email')?.status=='INVALID'">
               <p class="mb-0" *ngIf="employeeForm.get('email')?.getError('required')">Email is required</p>
-              <p class="mb-0" *ngIf="employeeForm.get('email')?.getError('email')">Please Enter a valid email ex:abc@abc</p>
+              <p class="mb-0" *ngIf="employeeForm.get('email')?.getError('email')">Please Enter a valid email ex:abc@abc.com</p>
             </div>
           </div>
           <div class="col-md-6">
@@ -99,11 +120,11 @@
                 </span>
               </div>
               <select
-                formControlName="department"
+                formControlName="departmentId"
                 class="form-select"
                 aria-label="Default select example"
               >
-                <option *ngFor="let item of departments">{{ item }}</option>
+                <option *ngFor="let item of departments" [value]="departments.indexOf(item)">{{ item }}</option>
               </select>
             </div>
             <div class="alert alert-danger py-1" *ngIf="employeeForm.get('department')?.touched&&employeeForm.get('department')?.status=='INVALID'">
@@ -114,16 +135,16 @@
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text h-100" id="basic-addon1">
-                  Manager
+                  Job Title
                 </span>
               </div>
               <select
-                formControlName="manager"
+                formControlName="jobTitleId"
                 class="form-select"
                 aria-label="Default select example"
               >
-                <option>manger</option>
-              </select>
+              <option *ngFor="let item of jobsTitles" [value]="jobsTitles.indexOf(item)">{{ item }}</option>
+            </select>
             </div>
             <div class="alert alert-danger py-1" *ngIf="employeeForm.get('manager')?.touched&&employeeForm.get('manager')?.status=='INVALID'">
               <p class="mb-0" *ngIf="employeeForm.get('manager')?.getError('required')">Manager is required</p>
