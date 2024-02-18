@@ -1,3 +1,4 @@
+
 export interface IEmployee {
    email: string,
     code: number,
@@ -8,4 +9,10 @@ export interface IEmployee {
     jobTitleId: number,
     id: number,
     name: string
+}
+export interface IEmployeesResponse {
+  totalEmployees: number,
+  pageIndex: number,
+  pageSize: number,
+  employees: IEmployee[]
 }

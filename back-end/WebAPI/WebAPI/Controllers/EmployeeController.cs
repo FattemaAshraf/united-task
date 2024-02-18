@@ -15,10 +15,24 @@ namespace WebAPI.Controllers
         }
         [HttpGet]
         [Route("GetAllEmployees")]
-        public async Task<IActionResult> GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployees(int pageIndex = 1, int pageSize = 10)
         {
-            var employees = await _context.Employees.ToListAsync();
-            return Ok(employees);
+            var totalEmployees = await _context.Employees.CountAsync();
+
+            var employees = await _context.Employees
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var result = new
+            {
+                TotalEmployees = totalEmployees,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Employees = employees
+            };
+
+            return Ok(result);
         }
         
 

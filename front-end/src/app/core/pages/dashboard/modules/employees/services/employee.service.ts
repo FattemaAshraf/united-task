@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEmployee } from '../models/iemployee';
+import { IEmployee, IEmployeesResponse } from '../models/iemployee';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class EmployeeService {
 
   constructor(private _httpClient: HttpClient ) { }
 
-  onGetAllEmployees():Observable<IEmployee[]>{
-    return this._httpClient.get<IEmployee[]>(`Employee/GetAllEmployees`)
+  onGetAllEmployees(params:any):Observable<IEmployeesResponse>{
+    return this._httpClient.get<IEmployeesResponse>(`Employee/GetAllEmployees`,{params})
   }
   onGetEmployee(id:number):Observable<IEmployee>{
     return this._httpClient.get<IEmployee>(`Employee/${id}`)
