@@ -1,6 +1,7 @@
 ﻿namespace WebAPI.Models
 {
-    public class Manager : Employee
+    public class JobTitle : BaseEntity
     {
+
     }
 }
