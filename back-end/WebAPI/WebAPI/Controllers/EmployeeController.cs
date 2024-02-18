@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
             _context = context;
         }
         [HttpGet]
+        [Route("GetAllEmployees")]
         public async Task<IActionResult> GetAllEmployees()
         {
             var employees = await _context.Employees.ToListAsync();
@@ -49,7 +50,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("Upadte/{id:int}")]
         public async Task<IActionResult> UpdateEmployee([FromRoute] int id, Employee updateEmployee)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -91,13 +92,13 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("ByCurrentDate")]
-        public async Task<IActionResult> GetEmployeesByCurrentDate()
+        public async Task<IActionResult> GetEmployeesByCurrentYear()
         {
-            DateTime currentDate = DateTime.Now.Date;
+            var currentYear = DateTime.Now.Date.Year;
 
             var employeesByCurrentDateCount = await _context.Employees
-                .Where(x => x.HireDate.Date == currentDate)
-                .CountAsync();
+                                                            .Where(x => x.HireDate.Date.Year == currentYear)
+                                                            .CountAsync();
 
             return Ok(employeesByCurrentDateCount);
         }
