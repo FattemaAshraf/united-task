@@ -22,6 +22,8 @@ namespace WebAPI.Controllers
         
 
         [HttpPost]
+        [Route("Create")]
+
         public async Task<IActionResult> AddEmployee([FromBody] Employee employeeRequest)
         {
             if (employeeRequest == null)
@@ -37,7 +39,7 @@ namespace WebAPI.Controllers
         }
         
         [HttpGet]
-        [Route("{id:Guid}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> GetEmployee([FromRoute] int id)
         {
             var employee =
@@ -47,7 +49,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("{id:Guid}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> UpdateEmployee([FromRoute] int id, Employee updateEmployee)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -63,11 +65,11 @@ namespace WebAPI.Controllers
             employee.NationalId = updateEmployee.NationalId;
 
             await _context.SaveChangesAsync();
-            return Ok(employee);
+            return Ok("Updated Successfully");
         }
 
         [HttpDelete]
-        [Route("{id:Guid}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> DeleteEmployee([FromRoute] int id)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -75,9 +77,40 @@ namespace WebAPI.Controllers
 
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
-            return Ok(employee);
+            return Ok("Deleted Successfully");
+        }
+
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> GetEmployeeCount()
+        {
+            var employeeCount = await _context.Employees.CountAsync();
+            return Ok(employeeCount);
         }
 
 
+        [HttpGet]
+        [Route("ByCurrentDate")]
+        public async Task<IActionResult> GetEmployeesByCurrentDate()
+        {
+            DateTime currentDate = DateTime.Now.Date;
+
+            var employeesByCurrentDateCount = await _context.Employees
+                .Where(x => x.HireDate.Date == currentDate)
+                .CountAsync();
+
+            return Ok(employeesByCurrentDateCount);
+        }
+
+        [HttpGet]
+        [Route("DepartmentId/{departmentId:int}")]
+        public async Task<IActionResult> GetEmployeesByDepartmentId(int departmentId)
+        {
+            var employeesByDepartment = await _context.Employees
+                                                      .Where(x => x.DepartmentId == departmentId)
+                                                      .ToListAsync();
+
+            return Ok(employeesByDepartment);
+        }
     }
 }
