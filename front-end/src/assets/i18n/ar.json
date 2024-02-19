@@ -1,0 +1,30 @@
+{
+  "SideBar":{
+    "boards":"الصفحات",
+    "home":"الرئيسية",
+    "employees":"الموظفون"
+  },
+  "DashBoard":{
+    "title":"الرئيسية",
+    "paragraph":"أنت الان تري أخر التفاصيل و الأخبار",
+    "Empolyees Count":"عدد الموظفون",
+    "New Hiring(2024)":"عدد الموظفون الجدد(2024)",
+    "Sales Department Count":"عدد موظفون قسم التسويق"
+  },
+  "EmployeesModule": {
+    "title": "الموظفون",
+    "paragraph":"أنت الان تري أخر التفاصيل و الأخبار",
+    "Add Employee": "اضافة موظف",
+    "Table":{
+      "Code":"كود",
+      "E-Mail":"البريد الإلكتروني",
+      "Name":"اسم الموظف",
+      "Mobile":"رقم الهاتف",
+      "Date":"تاريخ التعيين",
+      "Department":"اسم القسم",
+      "Job":"المسمي الوظيفي",
+      "Actions":"أجراءات",
+      "This is a warning No Data Found":"هذا تحذير لم يتم العثور على بيانات"
+    }
+  }
+}

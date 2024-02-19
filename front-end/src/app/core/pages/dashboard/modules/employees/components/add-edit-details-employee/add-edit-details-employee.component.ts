@@ -135,7 +135,7 @@ export class AddEditDetailsEmployeeComponent implements OnInit {
   //get Employyee + path value to form
   onGetEmployeeById(id: number) {
     this._employeeService.onGetEmployee(id).subscribe({
-      next: (res) => {
+      next: (res:IEmployee) => {
         console.log(res);
         this.detailsEmployee = res;
       },

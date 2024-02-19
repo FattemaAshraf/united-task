@@ -3,10 +3,9 @@
     <div class="row">
       <div class="d-flex justify-content-between align-items-center">
         <div class="page-header">
-          <h4><span>E</span>mployees</h4>
+          <h4>{{"EmployeesModule.title" | translate}}</h4>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-          </p>
+            {{"EmployeesModule.paragraph" | translate}} </p>
         </div>
         <button
           class="btn btn-primary"
@@ -15,67 +14,69 @@
           <span class="i-circle px-1"
             ><i class="fa-solid fa-plus fw-bold"></i
           ></span>
-          Add Employee
+          {{"EmployeesModule.Add Employee" | translate}}
         </button>
       </div>
-      <table class="table table-hover mt-5">
-        <thead>
-          <tr>
-            <th scope="col">Code</th>
-            <th scope="col">Name Employee</th>
-            <th scope="col">E-Mail</th>
-            <th scope="col">Mobile No.</th>
-            <th scope="col">Hire Date</th>
-            <th scope="col">Name Department</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <hr />
-          <ng-container *ngFor="let item of employeesData">
+      <div class="container-fluid">
+        <table class="table table-hover mt-5">
+          <thead>
             <tr>
-              <td scope="row">{{ item.code }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.email }}</td>
-              <td>{{ item.mobileNumber }}</td>
-              <td>{{ item.hireDate | date : "dd-MM-yyyy" }}</td>
-              <td>{{ departments[item.departmentId] }}</td>
-              <td>{{ jobsTitles[item.jobTitleId] }}</td>
-              <td class="m-auto text-center">
-                <a class="btn-action" [routerLink]="[
-                '/dashboard/employees/view-employee/',
-                item.id
-              ]"
-                  ><i class="fa-solid fa-eye fs-5 viewHover"></i
-                ></a>
-                <a
-                  class="btn-action"
-                  [routerLink]="[
-                    '/dashboard/employees/update-employee/',
-                    item.id
-                  ]"
-                  ><i class="fa-solid fa-pen-to-square px-3 fs-5 editHover"></i
-                ></a>
-                <a class="btn-action" (click)="openDialogDelete(item)">
-                  <i class="fa-solid fa-trash-can fs-5 deleteHover"></i>
-                </a>
-              </td>
+              <th scope="col">{{"EmployeesModule.Table.Code" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Name" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.E-Mail" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Mobile" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Date" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Department" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Job" | translate}}</th>
+              <th scope="col">{{"EmployeesModule.Table.Actions" | translate}}</th>
             </tr>
+          </thead>
+          <tbody>
             <hr />
-          </ng-container>
+            <ng-container *ngFor="let item of employeesData">
+              <tr>
+                <td scope="row">{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>{{ item.hireDate | date : "dd-MM-yyyy" }}</td>
+                <td>{{ departments[item.departmentId] }}</td>
+                <td>{{ jobsTitles[item.jobTitleId] }}</td>
+                <td class="m-auto text-center">
+                  <a class="btn-action" [routerLink]="[
+                  '/dashboard/employees/view-employee/',
+                  item.id
+                ]"
+                    ><i class="fa-solid fa-eye fs-5 viewHover"></i
+                  ></a>
+                  <a
+                    class="btn-action"
+                    [routerLink]="[
+                      '/dashboard/employees/update-employee/',
+                      item.id
+                    ]"
+                    ><i class="fa-solid fa-pen-to-square px-3 fs-5 editHover"></i
+                  ></a>
+                  <a class="btn-action" (click)="openDialogDelete(item)">
+                    <i class="fa-solid fa-trash-can fs-5 deleteHover"></i>
+                  </a>
+                </td>
+              </tr>
+              <hr />
+            </ng-container>
 
-          <div
-            class="alert alert-warning"
-            role="alert"
-            *ngIf="employeesData.length == 0"
-          >
-            This is a warning No Data Found
-          </div>
-        </tbody>
-      </table>
+            <div
+              class="alert alert-warning"
+              role="alert"
+              *ngIf="employeesData.length == 0"
+            >
+            {{"EmployeesModule.Table.This is a warning No Data Found" | translate}}
+            </div>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center"  [dir]="'ltr'">
       <mat-paginator
         [length]="employeesRespnse?.totalEmployees"
         [pageSizeOptions]="[5, 10, 25]"

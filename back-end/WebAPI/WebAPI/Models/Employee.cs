@@ -7,6 +7,7 @@ namespace WebAPI.Models
     public class Employee : BaseEntity
     {
 
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
         public long Code { get; set; }
