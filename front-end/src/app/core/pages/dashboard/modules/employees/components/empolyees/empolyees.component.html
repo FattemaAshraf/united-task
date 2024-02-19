@@ -43,7 +43,10 @@
               <td>{{ departments[item.departmentId] }}</td>
               <td>{{ jobsTitles[item.jobTitleId] }}</td>
               <td class="m-auto text-center">
-                <a class="btn-action"
+                <a class="btn-action" [routerLink]="[
+                '/dashboard/employees/view-employee/',
+                item.id
+              ]"
                   ><i class="fa-solid fa-eye fs-5 viewHover"></i
                 ></a>
                 <a
@@ -54,7 +57,7 @@
                   ]"
                   ><i class="fa-solid fa-pen-to-square px-3 fs-5 editHover"></i
                 ></a>
-                <a class="btn-action">
+                <a class="btn-action" (click)="openDialogDelete(item)">
                   <i class="fa-solid fa-trash-can fs-5 deleteHover"></i>
                 </a>
               </td>

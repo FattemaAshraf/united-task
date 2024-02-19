@@ -2,7 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="page-header">
-        <h4><span>E</span>mployees >> <span>A</span>dd Employee</h4>
+        <h4 *ngIf="isAddMode && !isUpdateMode"><span>E</span>mployees >> <span>A</span>dd Employee</h4>
+        <h4 *ngIf="isUpdateMode && !isViewMode"><span>E</span>mployees >> <span>U</span>pdate Employee</h4>
+        <h4 *ngIf="isViewMode"><span>E</span>mployees >> <span>V</span>iew Employee</h4>
+
         <p>Enter The details of Employee</p>
       </div>
       <form [formGroup]="employeeForm" (ngSubmit)="onSubmit(employeeForm)">
@@ -177,8 +180,8 @@
             </div>
           </div>
           <div class="d-flex justify-content-end gap-2 my-4">
-            <button  [disabled]="employeeForm.invalid" type="submit" class="btn btn-primary px-5">Save</button>
-            <button type="button" class="btn btn-outline-danger px-5">Cancel</button>
+            <button *ngIf="!isViewMode" [disabled]="employeeForm.invalid" type="submit" class="btn btn-primary px-5">Save</button>
+            <button [routerLink]="['/dashboard/employees']" type="button" class="btn btn-outline-danger px-5">Cancel</button>
           </div>
         </div>
       </form>

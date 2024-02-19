@@ -7,20 +7,40 @@
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
         </p>
       </div>
-      <ng-container *ngFor="let item of menu">
 
       <div class="card-item col-md-3 m-5">
         <h3>
-          <i [class]="'fa-solid text-main fa-3x' + ' ' + item.icon"></i>
+          <i class="fa-solid fa-users fa-3x"></i>
         </h3>
         <div
           class="d-flex flex-column justify-content-between align-items-center"
         >
-          <h1>{{ item.length }}</h1>
-          <p>{{ item.title }}</p>
+          <h1>{{empsTotalCount}}</h1>
+          <p>Empolyees Count</p>
         </div>
       </div>
-      </ng-container>
+      <div class="card-item col-md-3 m-5">
+        <h3>
+          <i class="fa-solid  fa-3x fa-user-plus"></i>
+        </h3>
+        <div
+          class="d-flex flex-column justify-content-between align-items-center"
+        >
+          <h1>{{currentYearEmps}}</h1>
+          <p>New Hiring(2024)</p>
+        </div>
+      </div>
+      <div class="card-item col-md-3 m-5">
+        <h3>
+          <i class="fa-solid text-main fa-3x fa-user-gear"></i>
+        </h3>
+        <div
+          class="d-flex flex-column justify-content-between align-items-center"
+        >
+          <h1>{{deptCountEmps}}</h1>
+          <p>Sales Department Count</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

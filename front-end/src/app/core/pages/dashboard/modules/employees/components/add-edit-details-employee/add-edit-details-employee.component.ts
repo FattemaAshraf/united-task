@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee.service';
 import { IEmployee } from '../../models/iemployee';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './add-edit-details-employee.component.html',
   styleUrls: ['./add-edit-details-employee.component.scss'],
 })
-export class AddEditDetailsEmployeeComponent {
+export class AddEditDetailsEmployeeComponent implements OnInit {
   //page mode of component
   isViewMode: boolean = true;
   isAddMode: boolean = true;
@@ -36,25 +36,6 @@ export class AddEditDetailsEmployeeComponent {
     'Executive or senior management',
   ];
 
-  //-------//
-
-  constructor(
-    private _employeeService: EmployeeService,
-    private _router: Router,
-    private _toastr: ToastrService,
-    private _activatedRoute: ActivatedRoute
-  ) {
-    this.employeeId = _activatedRoute.snapshot.params['id'];
-    if (this.employeeId) {
-      this.isUpdateMode = true;
-      this.onGetEmployeeById(this.employeeId);
-    } else {
-      this.isAddMode = true;
-      this.isUpdateMode = false;
-      this.isViewMode = false;
-    }
-  }
-
   //form
   employeeForm = new FormGroup({
     name: new FormControl(null, [
@@ -78,15 +59,45 @@ export class AddEditDetailsEmployeeComponent {
       Validators.pattern('^([0-9]){8,}$'),
     ]),
   });
+  //-------//
+
+  constructor(
+    private _employeeService: EmployeeService,
+    private _router: Router,
+    private _toastr: ToastrService,
+    private _activatedRoute: ActivatedRoute
+  ) {
+    this.employeeId = _activatedRoute.snapshot.params['id'];
+    if (this.employeeId) {
+      this.isUpdateMode = true;
+      this.onGetEmployeeById(this.employeeId);
+      this._activatedRoute.url.subscribe((url) => {
+        this.isViewMode = url.some((segment) => segment.path === 'view-employee');
+        console.log(this.isViewMode);
+      });
+    }
+     else {
+      this.isAddMode = true;
+      this.isUpdateMode = false;
+      this.isViewMode = false;
+    }
+  }
+
+  ngOnInit() {
+    //disabled form in view mode <<=======
+    if (this.isViewMode == true) {
+      this.employeeForm.disable();
+    }
+  }
 
   onSubmit(formData: FormGroup) {
     console.log(formData.value);
     this.employee = formData.value;
     console.log(this.employee);
     if (this.employeeId) {
-      this.onUpdatemployee(this.employeeId,this.employee)
+      this.onUpdatemployee(this.employeeId, this.employee);
     } else {
-      this.onAddEmployee(this.employee)
+      this.onAddEmployee(this.employee);
     }
   }
   //added integration

@@ -13,8 +13,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCommonModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 @NgModule({
-  declarations: [NotFoundRouteComponent, NavBarComponent, SideBarComponent],
+  declarations: [
+    NotFoundRouteComponent,
+    NavBarComponent,
+    SideBarComponent,
+    DeleteDialogComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -28,7 +35,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   exports: [
     NotFoundRouteComponent,
@@ -44,7 +52,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    DeleteDialogComponent,
+    MatDialogModule
   ],
 })
 export class SharedModule {}
