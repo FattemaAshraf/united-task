@@ -16,8 +16,8 @@
 
 ## Screenshots
 - ngx translate home page
-![Example screenshot](../united-task/front-end/src/assets/images/Screenshot_19.png)
-![Example screenshot](../united-task/front-end/src/assets/images/Screenshot_20.png)
+![Example screenshot](./front-end/src/assets/images/Screenshot_19.png)
+![Example screenshot](./front-end/src/assets/images/Screenshot_20.png)
 
 ## Vedio
 
