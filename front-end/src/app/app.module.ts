@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GlobalInterceptor } from './core/interceptors/global.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading-interceptor.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { LoadingInterceptor } from './core/interceptors/loading-interceptor.inte
     HttpClientModule,
     NgxSpinnerModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
   ],
   providers: [   {
     provide: HTTP_INTERCEPTORS,

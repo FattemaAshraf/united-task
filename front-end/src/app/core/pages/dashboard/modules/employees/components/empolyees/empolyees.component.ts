@@ -15,8 +15,8 @@ export class EmpolyeesComponent implements OnInit {
   employeesData: IEmployee[]=[];
   //paginations
   pageIndex: number=1;
-  pageSize:number=5;
-  totalEmployees:number=100;
+  pageSize:number=5666;
+  totalEmployees:number|any;
   //data for dept and jobTitle
   departments: string[] = [
     'General Management',
@@ -61,7 +61,8 @@ export class EmpolyeesComponent implements OnInit {
 //method pagenation
   handlePageEvent(e: PageEvent) {
     this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
+    this.pageIndex = e.pageIndex + 1;
+    console.log(e);
     this.getAllEmployees();
   }
 }

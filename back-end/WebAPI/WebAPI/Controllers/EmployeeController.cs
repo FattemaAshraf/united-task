@@ -80,7 +80,12 @@ namespace WebAPI.Controllers
             employee.NationalId = updateEmployee.NationalId;
 
             await _context.SaveChangesAsync();
-            return Ok("Updated Successfully");
+            var result = new
+                     {
+                    Sucess = "Updated Successfully",
+                    Employee = employee
+                     };
+            return Ok(result);
         }
 
         [HttpDelete]

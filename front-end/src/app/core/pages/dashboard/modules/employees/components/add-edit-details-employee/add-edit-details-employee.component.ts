@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee.service';
 import { IEmployee } from '../../models/iemployee';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-edit-details-employee',
@@ -10,7 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-edit-details-employee.component.scss'],
 })
 export class AddEditDetailsEmployeeComponent {
-  addEmployee: IEmployee | any;
+  //page mode of component
+  isViewMode: boolean = true;
+  isAddMode: boolean = true;
+  isUpdateMode: boolean = true;
+
+  //-------//
+  employee: IEmployee | any;
+  detailsEmployee: IEmployee | any;
+  employeeId: number;
   departments: string[] = [
     'General Management',
     'Marketing Department',
@@ -27,10 +36,26 @@ export class AddEditDetailsEmployeeComponent {
     'Executive or senior management',
   ];
 
+  //-------//
+
   constructor(
     private _employeeService: EmployeeService,
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private _toastr: ToastrService,
+    private _activatedRoute: ActivatedRoute
+  ) {
+    this.employeeId = _activatedRoute.snapshot.params['id'];
+    if (this.employeeId) {
+      this.isUpdateMode = true;
+      this.onGetEmployeeById(this.employeeId);
+    } else {
+      this.isAddMode = true;
+      this.isUpdateMode = false;
+      this.isViewMode = false;
+    }
+  }
+
+  //form
   employeeForm = new FormGroup({
     name: new FormControl(null, [
       Validators.required,
@@ -56,17 +81,56 @@ export class AddEditDetailsEmployeeComponent {
 
   onSubmit(formData: FormGroup) {
     console.log(formData.value);
-    this.addEmployee= formData.value;
-    console.log(this.addEmployee);
-    this._employeeService.onAddEmployee(this.addEmployee).subscribe({
+    this.employee = formData.value;
+    console.log(this.employee);
+    if (this.employeeId) {
+      this.onUpdatemployee(this.employeeId,this.employee)
+    } else {
+      this.onAddEmployee(this.employee)
+    }
+  }
+  //added integration
+  onAddEmployee(addNewEmp: IEmployee) {
+    this._employeeService.onAddEmployee(addNewEmp).subscribe({
       next: (res) => {
         console.log(res);
       },
       error: (err) => {
         console.log(err);
+        this._toastr.error('Something was wrong', 'try again');
       },
       complete: () => {
+        this._toastr.success('Employee Added Successfully');
         this._router.navigate(['/dashboard/employees']);
+      },
+    });
+  }
+  //updated integration
+  onUpdatemployee(id: number, updatedEmp: IEmployee) {
+    this._employeeService.onUpdateEmployee(id, updatedEmp).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+        this._toastr.error('Something was wrong', 'try again');
+      },
+      complete: () => {
+        this._toastr.success('Employee Updated Successfully');
+        this._router.navigate(['/dashboard/employees']);
+      },
+    });
+  }
+  //get Employyee + path value to form
+  onGetEmployeeById(id: number) {
+    this._employeeService.onGetEmployee(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.detailsEmployee = res;
+      },
+      error: () => {},
+      complete: () => {
+        this.employeeForm.patchValue(this.detailsEmployee);
       },
     });
   }
