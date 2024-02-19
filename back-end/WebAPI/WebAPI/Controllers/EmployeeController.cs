@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
                 .Take(pageSize)
                 .ToListAsync();
 
-            var result = new
+            var response = new
             {
                 TotalEmployees = totalEmployees,
                 PageIndex = pageIndex,
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                 Employees = employees
             };
 
-            return Ok(result);
+            return Ok(response);
         }
         
 
@@ -60,7 +60,12 @@ namespace WebAPI.Controllers
             var employee =
                 await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
             if (employee == null) return NotFound();
-            return Ok(employee);
+            var response = new
+            {
+                message = "Added Successfully",
+                Employee = employee
+            };
+            return Ok(response);
         }
 
         [HttpPut]
@@ -80,12 +85,12 @@ namespace WebAPI.Controllers
             employee.NationalId = updateEmployee.NationalId;
 
             await _context.SaveChangesAsync();
-            var result = new
+            var response = new
                      {
-                    Sucess = "Updated Successfully",
+                    message = "Updated Successfully",
                     Employee = employee
                      };
-            return Ok(result);
+            return Ok(response);
         }
 
         [HttpDelete]
@@ -97,7 +102,12 @@ namespace WebAPI.Controllers
 
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
-            return Ok("Deleted Successfully");
+            var response = new
+            {
+                message = "Deleted Successfully",
+                Employee = employee
+            };
+            return Ok(response);
         }
 
         [HttpGet]
