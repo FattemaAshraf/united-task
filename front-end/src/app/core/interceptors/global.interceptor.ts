@@ -15,10 +15,10 @@ export class GlobalInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
     const baseUrl:string = 'https://localhost:7152/api/';
     let newHeaders = {};
-    let x = request.clone({
-      setHeaders: newHeaders, url:baseUrl + request.url
+    let newRequest = request.clone({
+      setHeaders: newHeaders, url: request.url.includes('assets') ? request.url : baseUrl + request.url
     })
 
-    return next.handle(x);
+    return next.handle(newRequest);
   }
 }

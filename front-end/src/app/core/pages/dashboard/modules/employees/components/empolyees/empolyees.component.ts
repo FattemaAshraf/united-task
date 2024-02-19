@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: 'app-empolyees',
@@ -39,7 +40,8 @@ export class EmpolyeesComponent implements OnInit {
   constructor(
     private _employeeService: EmployeeService,
     public dialog: MatDialog,
-    private _tostar: ToastrService
+    private _tostar: ToastrService,
+    public HelperService: HelperService
   ) {}
 
   //ngOnit

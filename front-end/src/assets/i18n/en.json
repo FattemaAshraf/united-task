@@ -1,0 +1,30 @@
+{
+  "SideBar": {
+    "boards": "Your Boards",
+    "home": "Home",
+    "employees": "Employees"
+  },
+  "DashBoard": {
+    "title": "Dashboard",
+    "paragraph": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat",
+    "Empolyees Count": "Empolyees Count",
+    "New Hiring(2024)": "New Hiring(2024)",
+    "Sales Department Count": "Sales Department Count"
+  },
+  "EmployeesModule": {
+    "title": "Employees",
+    "paragraph": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat",
+    "Add Employee": "Add Employee",
+    "Table":{
+      "Code":"Code",
+      "E-Mail":"E-Mail",
+      "Name":"Name Employee",
+      "Mobile":"Mobile No.",
+      "Date":"Hire Date",
+      "Department":"Name Department",
+      "Job":"Job Title",
+      "Actions":"Actions",
+      "This is a warning No Data Found":"This is a warning No Data Found"
+    }
+  }
+}

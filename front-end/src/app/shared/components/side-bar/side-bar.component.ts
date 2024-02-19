@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from '../../services/helper.service';
 interface IMenu {
   title: string;
   icon: string;
@@ -16,6 +17,7 @@ export class SideBarComponent {
 
   constructor(
     private _router: Router,
+    public  HelperService:HelperService
   ) {}
   ngOnInit() {
       this._router.navigate(['/dashboard/landing-page']);

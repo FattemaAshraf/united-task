@@ -6,8 +6,8 @@
         <p  class="mb-0">full stack .Net</p>
       </div>
       <div>
-        <a class="btn btn-outline-primary mx-2">عربي</a>
-        <a class="btn btn-primary">Engliash</a>
+        <a class="btn mx-2" [ngClass]="HelperService.textDir=='rtl'?'btn-primary':' btn-outline-primary'" (click)="onChangeLang('ar')">عربي</a>
+        <a class="btn" [ngClass]="HelperService.textDir=='ltr'?'btn-primary':' btn-outline-primary'"  (click)="onChangeLang('en' )">Engliash</a>
       </div>
     </div>
   </div>

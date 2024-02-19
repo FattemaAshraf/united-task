@@ -1,24 +1,69 @@
 <section id="side-bar">
   <div class="container-fluid">
     <div class="row">
-      <div class="d-flex align-items-center shadow-sm" [class]="
-      isOpened ? 'justify-content-center' : 'justify-content-between'" >
-        <span  [ngClass]="isOpened ? 'd-none' : ''">Your Boards</span>
-        <button (click)="onClicked()"  mat-icon-button
-        matTooltip="Collapse your side bar" aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>{{
-          isOpened ? "arrow_forward_ios" : "arrow_back_ios"
+      <div
+        class="d-flex align-items-center shadow-sm"
+        [class]="
+          isOpened ? 'justify-content-center' : 'justify-content-between'
+        "
+      >
+        <span [ngClass]="isOpened ? 'd-none' : ''">{{
+          "SideBar.boards" | translate
+        }}</span>
+        <button
+          (click)="onClicked()"
+          mat-icon-button
+          matTooltip="Collapse your side bar"
+          aria-label="Example icon button with a vertical three dot icon"
+        >
+          <mat-icon>
+            {{
+            isOpened ? "arrow_forward_ios" : "arrow_back_ios"
           }}</mat-icon>
-      </button>
+        </button>
       </div>
       <ul class="mt-2">
-        <li *ngFor="let item of menu" [routerLink]="item.link" mat-icon-button [matTooltip]="isOpened?item.title:''"
-        [routerLinkActive]="['bg-active', 'bg-hover']">
-        <a [class]="
-            isOpened ? 'd-flex justify-content-center align-items-center' : ''
-          " routerLinkActive="text-white"><i [class]="item.icon"></i>
-          <span [ngClass]="isOpened ? 'd-none' : ''" class="mx-2">{{ item.title }}</span></a>
-      </li>
+        <!-- list tabs of side bar -->
+        <!-- Home -->
+        <li
+          routerLink="/dashboard/landing-page"
+          mat-icon-button
+          [matTooltip]="isOpened ? 'home' : ''"
+          [routerLinkActive]="['bg-active', 'bg-hover']"
+        >
+          <a
+            [class]="
+              isOpened ? 'd-flex justify-content-center align-items-center' : ''
+            "
+            routerLinkActive="text-white"
+            ><i class="fa-solid fa-house"></i>
+            <span [ngClass]="isOpened ? 'd-none' : ''" class="mx-2">
+            {{
+              "SideBar.home" | translate
+            }}</span></a
+          >
+        </li>
+
+        <!-- employees -->
+
+        <li
+          routerLink="/dashboard/employees"
+          mat-icon-button
+          [matTooltip]="isOpened ? 'home' : ''"
+          [routerLinkActive]="['bg-active', 'bg-hover']"
+        >
+          <a
+            [class]="
+              isOpened ? 'd-flex justify-content-center align-items-center' : ''
+            "
+            routerLinkActive="text-white"
+            ><i class="fa-solid fa-users"></i>
+            <span [ngClass]="isOpened ? 'd-none' : ''" class="mx-2">
+            {{
+              "SideBar.employees" | translate
+            }}</span></a
+          >
+        </li>
       </ul>
     </div>
   </div>
