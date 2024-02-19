@@ -30,7 +30,7 @@ export class EmployeeService {
     return this._httpClient.get<number>(`Employee/Count`)
   }
   onCountEmployeesByCurrentYear():Observable<number>{
-    return this._httpClient.get<number>('Employee/Count')
+    return this._httpClient.get<number>('Employee/ByCurrentDate')
   }
   onGetEmployeesByDeptId(id:number):Observable<IEmployee[]>{
     return this._httpClient.get<IEmployee[]>(`Employee/DepartmentId/${id}`)

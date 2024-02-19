@@ -123,13 +123,14 @@ namespace WebAPI.Controllers
         [Route("ByCurrentDate")]
         public async Task<IActionResult> GetEmployeesByCurrentYear()
         {
-            var currentYear = DateTime.Now.Date.Year;
+            var currentYear = DateTime.Now.Year;
 
             var employeesByCurrentDateCount = await _context.Employees
-                                                            .Where(x => x.HireDate.Date.Year == currentYear)
+                                                            .Where(x => x.HireDate.Year == currentYear)
                                                             .CountAsync();
 
             return Ok(employeesByCurrentDateCount);
+
         }
 
         [HttpGet]
