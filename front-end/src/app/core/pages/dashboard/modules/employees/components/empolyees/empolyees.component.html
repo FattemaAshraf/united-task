@@ -43,7 +43,10 @@
               <td>{{ departments[item.departmentId] }}</td>
               <td>{{ jobsTitles[item.jobTitleId] }}</td>
               <td class="m-auto text-center">
-                <a class="btn-action"
+                <a class="btn-action" [routerLink]="[
+                '/dashboard/employees/view-employee/',
+                item.id
+              ]"
                   ><i class="fa-solid fa-eye fs-5 viewHover"></i
                 ></a>
                 <a

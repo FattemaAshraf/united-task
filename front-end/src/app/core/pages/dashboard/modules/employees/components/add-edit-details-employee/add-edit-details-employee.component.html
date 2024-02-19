@@ -2,7 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="page-header">
-        <h4><span>E</span>mployees >> <span>A</span>dd Employee</h4>
+        <h4 *ngIf="isAddMode && !isUpdateMode"><span>E</span>mployees >> <span>A</span>dd Employee</h4>
+        <h4 *ngIf="isUpdateMode && !isViewMode"><span>E</span>mployees >> <span>U</span>pdate Employee</h4>
+        <h4 *ngIf="isViewMode"><span>E</span>mployees >> <span>V</span>iew Employee</h4>
+
         <p>Enter The details of Employee</p>
       </div>
       <form [formGroup]="employeeForm" (ngSubmit)="onSubmit(employeeForm)">
