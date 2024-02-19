@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -48,8 +49,13 @@ namespace WebAPI.Controllers
 
             await _context.Employees.AddAsync(employeeRequest);
             await _context.SaveChangesAsync();
+            var response = new
+            {
+                message = "Added Successfully",
+                Employee = employeeRequest
+            };
 
-            return Ok(employeeRequest);
+            return Ok(response);
 
         }
         
@@ -60,12 +66,8 @@ namespace WebAPI.Controllers
             var employee =
                 await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
             if (employee == null) return NotFound();
-            var response = new
-            {
-                message = "Added Successfully",
-                Employee = employee
-            };
-            return Ok(response);
+            
+            return Ok(employee);
         }
 
         [HttpPut]
