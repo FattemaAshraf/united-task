@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
+
+
 @NgModule({
   declarations: [
     NotFoundRouteComponent,
