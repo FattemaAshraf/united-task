@@ -17,7 +17,7 @@ export class EmpolyeesComponent implements OnInit {
   employeesData: IEmployee[] = [];
   //paginations
   pageIndex: number = 1;
-  pageSize: number = 5666;
+  pageSize: number =5;
   totalEmployees: number | any;
   //data for dept and jobTitle
   departments: string[] = [
@@ -67,10 +67,12 @@ export class EmpolyeesComponent implements OnInit {
   //method pagenation
   handlePageEvent(e: PageEvent) {
     this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex + 1;
+    this.pageIndex = e.pageIndex +1;
     console.log(e);
     this.getAllEmployees();
   }
+
+
   openDialogDelete(empData: IEmployee): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data:  empData ,
