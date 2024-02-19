@@ -14,10 +14,25 @@ namespace WebAPI.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllEmployees()
+        [Route("GetAllEmployees")]
+        public async Task<IActionResult> GetAllEmployees(int pageIndex = 1, int pageSize = 10)
         {
-            var employees = await _context.Employees.ToListAsync();
-            return Ok(employees);
+            var totalEmployees = await _context.Employees.CountAsync();
+
+            var employees = await _context.Employees
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var result = new
+            {
+                TotalEmployees = totalEmployees,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Employees = employees
+            };
+
+            return Ok(result);
         }
         
 
@@ -49,7 +64,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("Upadte/{id:int}")]
         public async Task<IActionResult> UpdateEmployee([FromRoute] int id, Employee updateEmployee)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -65,7 +80,12 @@ namespace WebAPI.Controllers
             employee.NationalId = updateEmployee.NationalId;
 
             await _context.SaveChangesAsync();
-            return Ok("Updated Successfully");
+            var result = new
+                     {
+                    Sucess = "Updated Successfully",
+                    Employee = employee
+                     };
+            return Ok(result);
         }
 
         [HttpDelete]
@@ -91,13 +111,13 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("ByCurrentDate")]
-        public async Task<IActionResult> GetEmployeesByCurrentDate()
+        public async Task<IActionResult> GetEmployeesByCurrentYear()
         {
-            DateTime currentDate = DateTime.Now.Date;
+            var currentYear = DateTime.Now.Date.Year;
 
             var employeesByCurrentDateCount = await _context.Employees
-                .Where(x => x.HireDate.Date == currentDate)
-                .CountAsync();
+                                                            .Where(x => x.HireDate.Date.Year == currentYear)
+                                                            .CountAsync();
 
             return Ok(employeesByCurrentDateCount);
         }

@@ -5,7 +5,10 @@ import { AddEditDetailsEmployeeComponent } from './components/add-edit-details-e
 
 const routes: Routes = [
   {path:'',component: EmpolyeesComponent},
-  {path:'add-employee',component: AddEditDetailsEmployeeComponent}
+  {path:'add-employee',component: AddEditDetailsEmployeeComponent},
+  {path:'update-employee/:id', component: AddEditDetailsEmployeeComponent},
+  {path:'view-employee/:id', component: AddEditDetailsEmployeeComponent}
+
 ];
 
 @NgModule({

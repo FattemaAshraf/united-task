@@ -8,55 +8,80 @@
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
           </p>
         </div>
-          <button class=" btn btn-primary" [routerLink]="['/dashboard/employees/add-employee']">
-            <span class="i-circle px-1"
-              ><i class="fa-solid fa-plus fw-bold"></i
-            ></span>
-            Add Employee
-          </button>
-
+        <button
+          class="btn btn-primary"
+          [routerLink]="['/dashboard/employees/add-employee']"
+        >
+          <span class="i-circle px-1"
+            ><i class="fa-solid fa-plus fw-bold"></i
+          ></span>
+          Add Employee
+        </button>
       </div>
-      <table class="table table-hover">
+      <table class="table table-hover mt-5">
         <thead>
           <tr>
             <th scope="col">Code</th>
             <th scope="col">Name Employee</th>
-            <th scope="col">Name Department</th>
-            <th scope="col">Hire Date</th>
             <th scope="col">E-Mail</th>
             <th scope="col">Mobile No.</th>
+            <th scope="col">Hire Date</th>
+            <th scope="col">Name Department</th>
+            <th scope="col">Job Title</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <hr />
+          <ng-container *ngFor="let item of employeesData">
             <tr>
-              <td scope="row">Code</td>
-              <td>Name Employee</td>
-              <td>Name Department</td>
-              <td>E-Mail</td>
-              <td>Mobile No.</td>
-              <td>Hire Date</td>
-              <td class="m-auto text-center ">
+              <td scope="row">{{ item.code }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.mobileNumber }}</td>
+              <td>{{ item.hireDate | date : "dd-MM-yyyy" }}</td>
+              <td>{{ departments[item.departmentId] }}</td>
+              <td>{{ jobsTitles[item.jobTitleId] }}</td>
+              <td class="m-auto text-center">
                 <a class="btn-action"
                   ><i class="fa-solid fa-eye fs-5 viewHover"></i
                 ></a>
-                <a class="btn-action"
-                  ><i
-                    class="fa-solid fa-pen-to-square  px-3 fs-5 editHover"
-                  ></i
+                <a
+                  class="btn-action"
+                  [routerLink]="[
+                    '/dashboard/employees/update-employee/',
+                    item.id
+                  ]"
+                  ><i class="fa-solid fa-pen-to-square px-3 fs-5 editHover"></i
                 ></a>
-                <a  class="btn-action  ">
+                <a class="btn-action">
                   <i class="fa-solid fa-trash-can fs-5 deleteHover"></i>
                 </a>
               </td>
             </tr>
             <hr />
-          <!-- <div class="alert alert-warning" role="alert" *ngIf="employeesResponse.length ==0">
+          </ng-container>
+
+          <div
+            class="alert alert-warning"
+            role="alert"
+            *ngIf="employeesData.length == 0"
+          >
             This is a warning No Data Found
-          </div> -->
+          </div>
         </tbody>
       </table>
+    </div>
+    <div class="d-flex justify-content-center">
+      <mat-paginator
+        [length]="employeesRespnse?.totalEmployees"
+        [pageSizeOptions]="[5, 10, 25]"
+        [pageSize]="employeesRespnse?.pageSize"
+        (page)="handlePageEvent($event)"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+      >
+      </mat-paginator>
     </div>
   </div>
 </section>
